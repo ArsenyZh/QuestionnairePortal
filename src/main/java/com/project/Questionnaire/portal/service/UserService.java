@@ -38,4 +38,10 @@ public class UserService {
 
         return user;
     }
+
+    public User findByEmail(String email) {
+        User foundUser = userRepository.findUserByEmail(email);
+
+        return foundUser;
+    }
 }
