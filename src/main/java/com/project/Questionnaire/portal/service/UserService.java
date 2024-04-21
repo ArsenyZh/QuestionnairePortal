@@ -32,8 +32,8 @@ public class UserService {
         return user;
     }
 
-    public User changeUserPassword(User user, User updatedUser) {
-        user.setPassword(updatedUser.getPassword());
+    public User changeUserPassword(User user, String newPassword) {
+        user.setPassword(newPassword);
         userRepository.save(user);
 
         return user;
