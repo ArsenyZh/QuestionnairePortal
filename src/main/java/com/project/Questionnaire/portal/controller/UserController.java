@@ -27,14 +27,14 @@ public class UserController {
     @Autowired
     private EditInfoMapper editInfoMapper;
 
-    @PutMapping("user/edit_info/{id}")
+    @PutMapping("/user/edit_info/{id}")
     public UserDto editInfo(@RequestBody EditInfoDto editInfoDto, @PathVariable("id") User user) {
         userService.editUserInfo(user, editInfoMapper.toUser(editInfoDto));
 
         return userMapper.toUserDto(user);
     }
 
-    @PutMapping("user/change_pas/{id}")
+    @PutMapping("/user/change_pas/{id}")
     public UserDto changePassword(@RequestBody ChangePasswordDto changePasswordDto, @PathVariable("id") User user) {
         if (bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
                 changePasswordDto.getNewPassword() == changePasswordDto.getConfNewPassword()) {
