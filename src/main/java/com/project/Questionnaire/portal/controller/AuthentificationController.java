@@ -26,7 +26,7 @@ public class AuthentificationController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @PostMapping("user/log_in")
+    @PostMapping("/log_in")
     public UserDto logInUser(@RequestBody LoginDto loginDto) {
         User user = userService.findByEmail(loginDto.getEmail());
 
@@ -37,11 +37,10 @@ public class AuthentificationController {
         }
     }
 
-    @PostMapping("/user/sign_up")
+    @PostMapping("/sign_up")
     public UserDto signUpUser(@RequestBody SignupDto signupDto) {
-        if (signupDto.getPassword() == signupDto.getConfPassword()) {
+        if (signupDto.getPassword().equals(signupDto.getConfPassword())) {
             User user = userService.registrateUser(signUpMapper.toUser(signupDto));
-
             return userMapper.toUserDto(user);
         } else {
             return null;
