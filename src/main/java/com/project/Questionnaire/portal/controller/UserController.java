@@ -28,15 +28,22 @@ public class UserController {
     private EditInfoMapper editInfoMapper;
 
     @PutMapping("/user/edit_info/{id}")
-    public UserDto editInfo(@RequestBody EditInfoDto editInfoDto, @PathVariable("id") User user) {
-        userService.editUserInfo(user, editInfoMapper.toUser(editInfoDto));
+    public UserDto editInfo(@RequestBody EditInfoDto editInfoDto, @PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
 
-        return userMapper.toUserDto(user);
+        if (user != null) {
+            userService.editUserInfo(user, editInfoMapper.toUser(editInfoDto));
+            return userMapper.toUserDto(user);
+        } else {
+            return null;
+        }
     }
 
     @PutMapping("/user/change_pas/{id}")
-    public UserDto changePassword(@RequestBody ChangePasswordDto changePasswordDto, @PathVariable("id") User user) {
-        if (bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
+    public UserDto changePassword(@RequestBody ChangePasswordDto changePasswordDto, @PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
+
+        if (user != null && bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
                 changePasswordDto.getNewPassword() == changePasswordDto.getConfNewPassword()) {
             userService.changeUserPassword(user, changePasswordDto.getNewPassword());
 
