@@ -10,10 +10,7 @@ import com.project.Questionnaire.portal.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -47,6 +44,17 @@ public class UserController {
                 changePasswordDto.getNewPassword() == changePasswordDto.getConfNewPassword()) {
             userService.changeUserPassword(user, changePasswordDto.getNewPassword());
 
+            return userMapper.toUserDto(user);
+        } else {
+            return null;
+        }
+    }
+
+    @GetMapping("/user/{id}")
+    public UserDto getUser(@PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
+
+        if (user != null) {
             return userMapper.toUserDto(user);
         } else {
             return null;
