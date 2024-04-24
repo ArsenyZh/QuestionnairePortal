@@ -1,8 +1,10 @@
 package com.project.Questionnaire.portal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +29,8 @@ public class User {
 
     @Column (name = "phone_number")
     private String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Response> responseList;
 }
