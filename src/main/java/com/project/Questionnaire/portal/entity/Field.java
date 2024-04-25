@@ -1,12 +1,9 @@
 package com.project.Questionnaire.portal.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.Questionnaire.portal.enums.FieldType;
 import com.project.Questionnaire.portal.enums.PostgreSQLEnumType;
 import lombok.Data;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,8 +11,6 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "fields")
-@TypeDef(name = "fieldType",
-        typeClass = PostgreSQLEnumType.class)
 public class Field {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +21,7 @@ public class Field {
     private String label;
 
     @Column (name = "type")
-    @Enumerated(EnumType.STRING)
-    @Embedded
-    @Type(type = "fieldType")
-    private FieldType type;
+    private String type;
 
     @Column (name = "is_required")
     private boolean required;

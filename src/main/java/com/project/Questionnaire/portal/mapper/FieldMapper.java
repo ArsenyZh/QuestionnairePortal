@@ -2,6 +2,7 @@ package com.project.Questionnaire.portal.mapper;
 
 import com.project.Questionnaire.portal.dto.FieldDto;
 import com.project.Questionnaire.portal.entity.Field;
+import com.project.Questionnaire.portal.enums.FieldType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class FieldMapper {
         field.setLabel(fieldDto.getLabel());
         field.setActive(fieldDto.isActive());
         field.setRequired(fieldDto.isRequired());
-        field.setType(fieldDto.getType());
+        field.setType(fieldDto.getType().toString());
 
         return field;
     }
@@ -24,7 +25,7 @@ public class FieldMapper {
         fieldDto.setLabel(field.getLabel());
         fieldDto.setActive(field.isActive());
         fieldDto.setRequired(field.isRequired());
-        fieldDto.setType(field.getType());
+        fieldDto.setType(FieldType.valueOf(field.getType()));
 
         return fieldDto;
     }
@@ -36,7 +37,7 @@ public class FieldMapper {
             fieldDto.setLabel(field.getLabel());
             fieldDto.setActive(field.isActive());
             fieldDto.setRequired(field.isRequired());
-            fieldDto.setType(field.getType());
+            fieldDto.setType(FieldType.valueOf(field.getType()));
             fieldDtoList.add(fieldDto);
         }
 

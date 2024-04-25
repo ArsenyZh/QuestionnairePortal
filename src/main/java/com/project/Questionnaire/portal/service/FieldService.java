@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,8 +13,11 @@ import java.util.List;
 public class FieldService {
     @Autowired
     private FieldRepository fieldRepository;
+    @Autowired
+    private UserService userService;
 
     public Field createField(Field field) {
+        field.setUser(userService.getUserByLogin());
         Field createdField = fieldRepository.save(field);
 
         return createdField;

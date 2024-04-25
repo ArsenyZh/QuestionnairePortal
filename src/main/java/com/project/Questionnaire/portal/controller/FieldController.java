@@ -37,7 +37,9 @@ public class FieldController {
     public FieldDto updateField(@RequestBody FieldDto fieldDto, @PathVariable("id") Long fieldId) {
         Field field = fieldService.findById(fieldId);
 
+
         if (field != null) {
+            fieldService.updateField(field, fieldMapper.toField(fieldDto));
             return fieldMapper.toFieldDto(field);
         } else {
             return null;
