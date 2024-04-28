@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public User changeUserPassword(User user, String newPassword) {
-        user.setPassword(newPassword);
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
         userRepository.save(user);
 
         return user;
@@ -53,6 +53,6 @@ public class UserService {
     }
 
     public User getUserByLogin() {
-        return userRepository.getUserByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userRepository.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }
