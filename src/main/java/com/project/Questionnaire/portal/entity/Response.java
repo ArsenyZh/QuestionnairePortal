@@ -15,10 +15,6 @@ public class Response {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
     @JsonIgnore
     @OneToMany(mappedBy = "response", cascade = CascadeType.ALL)
     private List<Answer> answerList;

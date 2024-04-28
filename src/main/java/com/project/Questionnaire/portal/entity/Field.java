@@ -32,8 +32,4 @@ public class Field {
     @JsonIgnore
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
     private List<Answer> answerList;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 }

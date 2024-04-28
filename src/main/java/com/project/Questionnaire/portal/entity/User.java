@@ -29,8 +29,4 @@ public class User {
 
     @Column (name = "phone_number")
     private String phoneNumber;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Response> responseList;
 }
