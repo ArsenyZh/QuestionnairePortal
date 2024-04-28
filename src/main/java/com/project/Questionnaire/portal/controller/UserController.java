@@ -41,7 +41,7 @@ public class UserController {
         User user = userService.findById(userId);
 
         if (user != null && bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
-                changePasswordDto.getNewPassword() == changePasswordDto.getConfNewPassword()) {
+                changePasswordDto.getNewPassword().equals(changePasswordDto.getConfNewPassword())) {
             userService.changeUserPassword(user, changePasswordDto.getNewPassword());
 
             return userMapper.toUserDto(user);
