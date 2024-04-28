@@ -17,7 +17,6 @@ public class FieldService {
     private UserService userService;
 
     public Field createField(Field field) {
-        field.setUser(userService.getUserByLogin());
         Field createdField = fieldRepository.save(field);
 
         return createdField;
