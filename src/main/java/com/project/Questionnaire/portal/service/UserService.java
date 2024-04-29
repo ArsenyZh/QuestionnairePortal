@@ -4,6 +4,7 @@ import com.project.Questionnaire.portal.entity.User;
 import com.project.Questionnaire.portal.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class UserService {
     }
 
     public User changeUserPassword(User user, String newPassword) {
-        user.setPassword(newPassword);
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
         userRepository.save(user);
 
         return user;
@@ -43,5 +44,15 @@ public class UserService {
         User foundUser = userRepository.findUserByEmail(email);
 
         return foundUser;
+    }
+
+    public User findById(Long id) {
+        User foundUser = userRepository.findById(id).orElse(null);
+
+        return foundUser;
+    }
+
+    public User getUserByLogin() {
+        return userRepository.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }

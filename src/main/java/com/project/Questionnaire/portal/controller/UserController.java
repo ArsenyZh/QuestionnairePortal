@@ -10,10 +10,7 @@ import com.project.Questionnaire.portal.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -28,18 +25,36 @@ public class UserController {
     private EditInfoMapper editInfoMapper;
 
     @PutMapping("/user/edit_info/{id}")
-    public UserDto editInfo(@RequestBody EditInfoDto editInfoDto, @PathVariable("id") User user) {
-        userService.editUserInfo(user, editInfoMapper.toUser(editInfoDto));
+    public UserDto editInfo(@RequestBody EditInfoDto editInfoDto, @PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
 
-        return userMapper.toUserDto(user);
+        if (user != null) {
+            userService.editUserInfo(user, editInfoMapper.toUser(editInfoDto));
+            return userMapper.toUserDto(user);
+        } else {
+            return null;
+        }
     }
 
     @PutMapping("/user/change_pas/{id}")
-    public UserDto changePassword(@RequestBody ChangePasswordDto changePasswordDto, @PathVariable("id") User user) {
-        if (bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
-                changePasswordDto.getNewPassword() == changePasswordDto.getConfNewPassword()) {
+    public UserDto changePassword(@RequestBody ChangePasswordDto changePasswordDto, @PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
+
+        if (user != null && bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
+                changePasswordDto.getNewPassword().equals(changePasswordDto.getConfNewPassword())) {
             userService.changeUserPassword(user, changePasswordDto.getNewPassword());
 
+            return userMapper.toUserDto(user);
+        } else {
+            return null;
+        }
+    }
+
+    @GetMapping("/user/{id}")
+    public UserDto getUser(@PathVariable("id") Long userId) {
+        User user = userService.findById(userId);
+
+        if (user != null) {
             return userMapper.toUserDto(user);
         } else {
             return null;
