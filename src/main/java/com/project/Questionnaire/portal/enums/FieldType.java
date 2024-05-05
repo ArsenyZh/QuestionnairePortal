@@ -5,7 +5,7 @@ import javax.persistence.Embedded;
 
 @Embeddable
 public enum FieldType {
-    Combox,
+    Combobox,
     Radiobutton,
     Textline,
 }
