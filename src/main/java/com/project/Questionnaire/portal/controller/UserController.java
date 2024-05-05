@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
 public class UserController {
@@ -59,5 +60,12 @@ public class UserController {
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/user")
+    public Long getUser() {
+        User user = userService.getUserByLogin();
+
+        return user.getId();
     }
 }
