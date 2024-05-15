@@ -12,6 +12,7 @@ import java.util.List;
 public class FieldMapper {
     public Field toField(FieldDto fieldDto) {
         Field field = new Field();
+        field.setId(fieldDto.getId());
         field.setLabel(fieldDto.getLabel());
         field.setActive(fieldDto.isActive());
         field.setRequired(fieldDto.isRequired());
@@ -22,6 +23,7 @@ public class FieldMapper {
 
     public FieldDto toFieldDto(Field field) {
         FieldDto fieldDto = new FieldDto();
+        fieldDto.setId(field.getId());
         fieldDto.setLabel(field.getLabel());
         fieldDto.setActive(field.isActive());
         fieldDto.setRequired(field.isRequired());
@@ -34,6 +36,7 @@ public class FieldMapper {
         List<FieldDto> fieldDtoList = new ArrayList<>();
         for (Field field : fieldList) {
             FieldDto fieldDto = new FieldDto();
+            fieldDto.setId(field.getId());
             fieldDto.setLabel(field.getLabel());
             fieldDto.setActive(field.isActive());
             fieldDto.setRequired(field.isRequired());
