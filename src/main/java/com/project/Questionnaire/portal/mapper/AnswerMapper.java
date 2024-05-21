@@ -16,6 +16,7 @@ public class AnswerMapper {
         for (Answer answer : answerList) {
             AnswerDto answerDto = new AnswerDto();
             answerDto.setAnswer(answer.getAnswer());
+            answerDto.setResponseId(answer.getResponse().getId());
             answerDto.setFieldId(answer.getField().getId());
             answerDtoList.add(answerDto);
         }
