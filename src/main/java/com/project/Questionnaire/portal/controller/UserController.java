@@ -49,7 +49,7 @@ public class UserController {
         if (user != null && bCryptPasswordEncoder.matches(changePasswordDto.getPassword(), user.getPassword()) &&
                 changePasswordDto.getNewPassword().equals(changePasswordDto.getConfNewPassword())) {
             try {
-                defaultEmailService.sendSimpleEmail("yzzahx@mailto.plus", "change password", "you password was successfully changed for " + changePasswordDto.getNewPassword());
+                defaultEmailService.sendSimpleEmail("vagugpf@mailto.plus", "change password", "you password was successfully changed for " + changePasswordDto.getNewPassword()); // заменить на email юзера
             } catch (MailException mailException) {
                 log.error("Error while sending out email..{}", mailException.getStackTrace());
             }

@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @AllArgsConstructor
 public class ResponseController {
