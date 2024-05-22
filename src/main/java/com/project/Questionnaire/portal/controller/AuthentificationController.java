@@ -11,7 +11,6 @@ import com.project.Questionnaire.portal.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.mail.MailException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +48,7 @@ public class AuthentificationController {
         if (signupDto.getPassword().equals(signupDto.getConfPassword())) {
             User user = userService.registrateUser(signUpMapper.toUser(signupDto));
             try {
-                defaultEmailService.sendSimpleEmail("yzzahx@mailto.plus", "sign_up",
+                defaultEmailService.sendSimpleEmail("vagugpf@mailto.plus", "sign_up",
                         signupDto.getFirstName() + " " + signupDto.getLastName() + ", you are successfully sign up"); // заменить на email юзера
             } catch (MailException mailException) {
                 log.error("Error while sending out email..{}", mailException.getStackTrace());
@@ -59,9 +58,4 @@ public class AuthentificationController {
             return null;
         }
     }
-
-//    @GetMapping(value = "/log_in", produces = MediaType.TEXT_HTML_VALUE)
-//    public String getLoginPage() {
-//        return "login";
-//    }
 }

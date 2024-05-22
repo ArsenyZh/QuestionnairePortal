@@ -31,5 +31,9 @@ public class Field {
 
     @JsonIgnore
     @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    private List<Options> options;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
     private List<Answer> answerList;
 }

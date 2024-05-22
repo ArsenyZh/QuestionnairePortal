@@ -14,7 +14,7 @@ public class FieldService {
     @Autowired
     private FieldRepository fieldRepository;
     @Autowired
-    private UserService userService;
+    private OptionsService optionsService;
 
     public Field createField(Field field) {
         Field createdField = fieldRepository.save(field);
@@ -27,6 +27,7 @@ public class FieldService {
         field.setLabel(updatedField.getLabel());
         field.setActive(updatedField.isActive());
         field.setRequired(updatedField.isActive());
+        optionsService.update(field.getOptions(), updatedField.getOptions());
         fieldRepository.save(field);
 
         return field;

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.Questionnaire.portal.enums.FieldType;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldDto {
@@ -12,4 +14,5 @@ public class FieldDto {
     private boolean isRequired;
     private boolean isActive;
     private FieldType type;
+    private List<OptionsDto> options;
 }
